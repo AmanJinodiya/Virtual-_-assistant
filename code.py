@@ -11,9 +11,10 @@ from requests import get
 import json
 import sys
 from pytube import YouTube
-
-import pywhatkit as kit
-import pyautogui as pg
+from selenium import webdriver
+from selenium.webdriver.common.keys import Keys
+# import pywhatkit as kit
+# import pyautogui as pg
 
 
 
@@ -71,6 +72,63 @@ def task_execution():
             speak("According to wikipedia")
             print(results)
             speak(results)
+
+        elif 'download song' in query:
+            speak("Which song you want to download sir")
+            a = takeCommand().lower()
+            if(len(a)):
+                
+                # Create object
+                driver = webdriver.Chrome()
+
+
+                url = "https://mp3quack.lol/"
+
+
+                new_url = "https://mp3quack.lol/"
+
+
+                driver.get(url)
+
+                inputElems = driver.find_elements_by_css_selector('[id="searchInput"]')
+
+                for inputElem in inputElems:
+
+	                inputElem.send_keys(a)
+
+	
+	                inputElem.send_keys(Keys.ENTER)
+
+                down_click  = driver.find_element_by_xpath("/html/body/div[2]/div[3]/div/div[2]/div[2]/ul[1]/li[3]/span[2]").click()
+
+
+                driver.execute_script("window.open('');")
+
+
+                driver.switch_to.window(driver.window_handles[1])
+                driver.get(new_url)
+
+                inputElems = driver.find_elements_by_css_selector('[id="searchInput"]')
+
+                for inputElem in inputElems:
+
+	                inputElem.send_keys(a)
+
+	
+	                inputElem.send_keys(Keys.ENTER)
+
+                down_click  = driver.find_element_by_xpath("/html/body/div[2]/div[3]/div/div[2]/div[2]/ul[1]/li[3]/span[2]").click()
+                down_click  = driver.find_element_by_xpath("/html/body/div[2]/div[3]/div/div[2]/div[2]/ul[1]/li[3]/span[2]").click()
+                speak("sir whichever you want click on it.. please or otherwise I choose for you SIR")
+    
+    
+    
+
+
+
+
+            else:
+                speak("sorry sir try again")
 
         elif 'open guruji' in query or 'sensei' in query or 'sensor' in query or 'open youtube' in query:
             webbrowser.open("youtube.com")
