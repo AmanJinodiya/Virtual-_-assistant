@@ -122,11 +122,6 @@ def task_execution():
                 speak("sir whichever you want click on it.. please or otherwise I choose for you SIR")
     
     
-    
-
-
-
-
             else:
                 speak("sorry sir try again")
 
