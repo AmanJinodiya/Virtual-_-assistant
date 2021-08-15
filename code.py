@@ -9,6 +9,7 @@ import smtplib
 import random
 from requests import get
 import json
+import PyPDF2
 import sys
 from pytube import YouTube
 from selenium import webdriver
@@ -212,7 +213,15 @@ def task_execution():
 
         elif 'restart pc' in query:
             os.system("shoutdown /r /t s")
-        
+        elif 'pdfcontent' in query:
+            speak("Please type Name of the pdf sir")
+            pdf_name = input() + ".pdf"
+            pdf_obj = open(pdf_name,'rb')
+            pdf_reader = PyPDF2.PdfFileReader(pdf_obj)
+            for i in range(pdf_reader.numPages()):
+                pageobj = pdf_reader.getPage(i)
+                print(pageobj.extractText())
+                print("**************************"+"page no"+i+"***********************************")
         
         elif 'sleep the pc' in query:
             os.system("rundll32.exe powrprof.dll,SetSuspendState 0,1,0")
