@@ -64,7 +64,7 @@ def task_execution():
     while True:
         query = takeCommand().lower()
         if 'hello ' in query:
-            speak("oo,hello sir ")
+            speak("o,hello sir ")
 
         if 'wikipedia' in query:
             speak("wait sir I am serching")
@@ -73,57 +73,56 @@ def task_execution():
             speak("According to wikipedia")
             print(results)
             speak(results)
-
+        
         elif 'download song' in query:
             speak("Which song you want to download sir")
             a = takeCommand().lower()
-            if(len(a)):
+            try:
+                 if(len(a)):
                 
-                # Create object
-                driver = webdriver.Chrome()
+               
+                    driver = webdriver.Chrome()
 
 
-                url = "https://mp3quack.lol/"
+                    url = "https://mp3quack.lol/"
 
 
-                new_url = "https://mp3quack.lol/"
+                    new_url = "https://mp3quack.lol/"
 
 
-                driver.get(url)
+                    driver.get(url)
 
-                inputElems = driver.find_elements_by_css_selector('[id="searchInput"]')
+                    inputElems = driver.find_elements_by_css_selector('[id="searchInput"]')
 
-                for inputElem in inputElems:
+                    for inputElem in inputElems:
 
-	                inputElem.send_keys(a)
-
-	
-	                inputElem.send_keys(Keys.ENTER)
-
-                down_click  = driver.find_element_by_xpath("/html/body/div[2]/div[3]/div/div[2]/div[2]/ul[1]/li[3]/span[2]").click()
-
-
-                driver.execute_script("window.open('');")
-
-
-                driver.switch_to.window(driver.window_handles[1])
-                driver.get(new_url)
-
-                inputElems = driver.find_elements_by_css_selector('[id="searchInput"]')
-
-                for inputElem in inputElems:
-
-	                inputElem.send_keys(a)
+	                    inputElem.send_keys(a)
 
 	
-	                inputElem.send_keys(Keys.ENTER)
+	                    inputElem.send_keys(Keys.ENTER)
 
-                down_click  = driver.find_element_by_xpath("/html/body/div[2]/div[3]/div/div[2]/div[2]/ul[1]/li[3]/span[2]").click()
-                down_click  = driver.find_element_by_xpath("/html/body/div[2]/div[3]/div/div[2]/div[2]/ul[1]/li[3]/span[2]").click()
-                speak("sir whichever you want click on it.. please or otherwise I choose for you SIR")
-    
-    
-            else:
+                    down_click  = driver.find_element_by_xpath("/html/body/div[2]/div[3]/div/div[2]/div[2]/ul[1]/li[3]/span[2]").click()
+
+
+                    driver.execute_script("window.open('');")
+
+
+                    driver.switch_to.window(driver.window_handles[1])
+                    driver.get(new_url)
+
+                    inputElems = driver.find_elements_by_css_selector('[id="searchInput"]')
+
+                    for inputElem in inputElems:
+
+	                    inputElem.send_keys(a)
+
+	
+	                    inputElem.send_keys(Keys.ENTER)
+
+                    down_click  = driver.find_element_by_xpath("/html/body/div[2]/div[3]/div/div[2]/div[2]/ul[1]/li[3]/span[2]").click()
+                    down_click  = driver.find_element_by_xpath("/html/body/div[2]/div[3]/div/div[2]/div[2]/ul[1]/li[3]/span[2]").click()
+                    speak("sir whichever you want click on it.. please or otherwise I choose for you SIR")
+            except exception as e:
                 speak("sorry sir try again")
 
         elif 'open guruji' in query or 'sensei' in query or 'sensor' in query or 'open youtube' in query:
@@ -144,8 +143,6 @@ def task_execution():
             speak("sir, What should i search on google")
             cm = takeCommand().lower()
             webbrowser.open(f"{cm}")
-
-
 
         elif 'download youtube video' in query:
             try:
@@ -240,38 +237,40 @@ def task_execution():
         #     img.save(f"{name}.png")
         #     speak("Done sir ,I tooked it")
 
-        elif 'now go to sleep' in query:
-            speak("ok sir Wake me up, I am there for you, I am not like your exes")
-            sys.exit()
+        elif 'now go to sleep' in query or 'buy jarvis' in query:
+            speak(" ok sir Wake me up, I am there for you, I am not like your exes")
+            break
         
         elif 'take rest' in query:
-            speak("Ok sir, by")
-            sys.exit()
-        
+            speak(" Ok sir, by")
+            break
+        elif 'wake up jarvis' in query:
+            speak("I am already waked up sir You forget to tell me for rest")
         elif 'take a break' in query:
-            speak("Ok sir \n Have a sweet day")
-            sys.exit()
+            speak(" Ok sir Have a sweet day")
+            break
 
 """***************************************************************************************************************************************"""
 if __name__ == "__main__":
-    wake_jarvis = takeCommand()
+    while True:
+        wake_jarvis = takeCommand()
 
-    if 'wake up' in wake_jarvis:
-        wishme()
-        speak("\n hope your day is fine, tell me ...")
-        task_execution()
+        if 'wake up' in wake_jarvis or 'listen jarvis' in wake_jarvis or 'hey jarvis' in wake_jarvis or 'hi jarvis' in wake_jarvis or 'hello jarvis' in wake_jarvis:
+            if wake_jarvis == "oh hello jarvis":
+                speak("oh,hello sir tell me")
+            else:
+                wishme()
+            speak("\n hope your day is fine, tell me how can I help you")
+            task_execution()
 
-    elif 'now go to sleep' in wake_jarvis:
-        speak("ok sir Wake me up, I am there for you, I am not like your exes")
-        sys.exit()
+        elif 'now go to sleep' in wake_jarvis:
+            speak("ok sir Wake me up, I am there for you, I am not like your exes")
+            sys.exit()
         
-    elif 'take rest' in wake_jarvis:
-        speak("Ok sir, by")
-        sys.exit()
+        elif 'take rest' in wake_jarvis:
+            speak("Ok sir, by")
+            sys.exit()
         
-    elif 'take a break' in wake_jarvis:
-        speak("Ok sir \n Have a sweet day")
-        sys.exit()
-    
-
-    
+        elif 'take a break' in wake_jarvis or 'buy jarvis' in wake_jarvis:
+            speak("Ok sir \n Have a sweet day")
+            sys.exit()
